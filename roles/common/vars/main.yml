@@ -1,0 +1,8 @@
+---
+  packages:
+    - ansible
+    - python-pip
+    - python3-pip
+    - debootstrap
+    - unzip
+    - apache2

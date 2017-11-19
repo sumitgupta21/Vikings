@@ -1,0 +1,21 @@
+---
+application_base_path: /opt/apps
+temporary_base_path: /opt/apps/tmp
+
+# jdk8
+jdk8_installation_path: "{{ application_base_path }}/jdk8"
+jdk8_download_path: "{{ temporary_base_path }}/jdk8"
+jdk8_home: "{{ jdk8_installation_path }}/jdk1.8.0_151"
+
+#Tomcat-8
+tomcat8_installation_path: "{{ application_base_path }}/tomcat"
+tomcat8_download_path: "{{ temporary_base_path }}/tomcat"
+tomcat8_home: "{{ tomcat8_installation_path }}/apache-tomcat-8.5.23"
+
+#MongoDB
+mongodb_key_server: hkp://keyserver.ubuntu.com:80
+keyserver_id: EA312927
+
+#SeleniumServer
+selenium_installation_path: "{{ application_base_path }}/selenium"
+selenium_logs_path: "{{ selenium_installation_path }}/logs"

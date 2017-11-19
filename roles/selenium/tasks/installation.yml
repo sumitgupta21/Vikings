@@ -1,0 +1,19 @@
+---
+ #tasks file for tomcat8
+  - name: Create installation directory
+    file: path={{ selenium_installation_path }}/ state=directory mode=0755
+
+  - name: Download selenium server
+    get_url:
+      url: http://selenium-release.storage.googleapis.com/2.43/selenium-server-standalone-2.43.1.jar
+      dest: "{{ selenium_installation_path }}/selenium-server-standalone.jar"
+      mode: 0740
+
+  - name: Create selenium logs directory
+    file: path={{ selenium_logs_path }}/ state=directory mode=0755
+
+  - name: Distribute selenium server as Service
+    template:
+      src: "seleniumservice.j2"
+      dest: "/etc/systemd/system/selenium.service"
+      mode: 0644

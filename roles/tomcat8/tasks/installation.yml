@@ -1,0 +1,25 @@
+---
+ #tasks file for tomcat8
+  - name: Create download directory
+    file: path={{ tomcat8_download_path }}/ state=directory mode=0755
+
+  - name: Download tomcat8
+    get_url:
+      url: http://apache.mirrors.ionfish.org/tomcat/tomcat-8/v8.5.23/bin/apache-tomcat-8.5.23.tar.gz
+      dest: "{{ tomcat8_download_path }}/apache-tomcat-8.5.23.tar.gz"
+      mode: 0740
+
+  - name: Create installation directory
+    file: path={{ tomcat8_installation_path }}/ state=directory mode=0755
+
+  - name: Install tomcat8
+    unarchive:
+      src: "{{ tomcat8_download_path }}/apache-tomcat-8.5.23.tar.gz"
+      dest: "{{ tomcat8_installation_path }}"
+      copy: no
+
+  - name: Distribute tomcat8 as Service
+    template:
+      src: "tomcatservice.j2"
+      dest: "/etc/systemd/system/tomcat.service"
+      mode: 0644

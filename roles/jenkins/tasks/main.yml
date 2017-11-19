@@ -1,0 +1,17 @@
+---
+# tasks file for mongodb
+  - name: Adding Jenkins repository key to the system
+    apt_key:
+      url: https://pkg.jenkins.io/debian/jenkins-ci.org.key
+      state: present
+      validate_certs: no
+
+  - name: Create a list file for Jenkins
+    template:
+      src: "jenkinslist.j2"
+      dest: "/etc/apt/sources.list.d/jenkins.list"
+
+  - name: Installing Jenkins
+    apt:
+      name: jenkins
+      update_cache: yes

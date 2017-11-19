@@ -1,0 +1,8 @@
+---
+  - hosts: targetservers
+    roles:
+      - common
+      - jdk8
+      - tomcat8
+      - mongodb
+      - selenium

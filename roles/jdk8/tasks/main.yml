@@ -1,0 +1,8 @@
+---
+# tasks file for jdk8
+  - name: Is jdk8 installed
+    stat: path={{ jdk8_installation_path }}
+    register: jdk8_installed
+
+  - include: installation.yml
+    when: not jdk8_installed.stat.exists

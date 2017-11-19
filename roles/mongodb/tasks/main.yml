@@ -1,0 +1,30 @@
+---
+# tasks file for mongodb
+  - name: Is mongodb installed
+    stat: path=/usr/bin/mongod
+    register: mongodb_installed
+
+  - name: Import MongoDB public GPG Key used by the package management system
+    apt_key:
+      keyserver: "{{ mongodb_key_server }}"
+      id: "{{ keyserver_id }}"
+    when: not mongodb_installed.stat.exists
+
+  - name: Create a list file for MongoDB
+    template:
+      src: "mongodborglist.j2"
+      dest: "/etc/apt/sources.list.d/mongodb-org-3.2.list"
+    when: not mongodb_installed.stat.exists
+
+  - name: Installing MongoDB
+    apt:
+      name: mongodb-org
+      update_cache: yes
+    when: not mongodb_installed.stat.exists
+
+  - name: Distribute mongodb as Service
+    template:
+      src: "mongodservice.j2"
+      dest: "/etc/systemd/system/mongod.service"
+      mode: 0644
+    when: not mongodb_installed.stat.exists

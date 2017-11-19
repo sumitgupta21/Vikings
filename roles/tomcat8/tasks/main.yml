@@ -1,0 +1,8 @@
+---
+# tasks file for jdk8
+  - name: Is tomcat8 installed
+    stat: path={{ tomcat8_installation_path }}
+    register: tomcat8_installed
+
+  - include: installation.yml
+    when: not tomcat8_installed.stat.exists

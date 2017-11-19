@@ -1,0 +1,8 @@
+---
+# tasks file for jdk8
+  - name: Is selenium server installed
+    stat: path={{ selenium_installation_path }}
+    register: selenium_installed
+
+  - include: installation.yml
+    when: not selenium_installed.stat.exists

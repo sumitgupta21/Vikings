@@ -1,0 +1,18 @@
+[Unit]
+Description=Selenium standalone server
+After=network.target
+
+[Service]
+Type=forking
+
+ExecStart={{ jdk8_home }}/bin/java -jar {{ selenium_installation_path }}/selenium-server-standalone.jar -port 4444 -trustAllSSLCertificates > {{ selenium_logs_path }}/output.log 2> {{ selenium_logs_path }}/error.log &
+ExecStop=kill -s SIGTERM $(pgrep -f "java.*selenium-server-standalone.jar")
+
+User=root
+Group=root
+UMask=0007
+RestartSec=10
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

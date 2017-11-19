@@ -1,0 +1,32 @@
+---
+  - name: Extend bashrc
+    blockinfile:
+      dest: /home/vagrant/.bashrc
+      marker: "# {mark} ANSIBLE MANAGED BLOCK"
+      content: |
+        if [ -f ~/.bashrc_local ]; then
+          . ~/.bashrc_local
+        fi
+
+  - name: Add bashrc_local
+    copy:
+      src: /vagrant/files/bashrc_local
+      dest: /home/vagrant/.bashrc_local
+      owner: vagrant
+      group: vagrant
+      mode: 0664
+      force: no
+
+  - name: Link bashrc_history data
+    file:
+      src: /home/vagrant/.bash_history
+      dest: /home/vagrant/.bash_history
+      state: link
+      force: yes
+
+  - name: Link gitconfig to data
+    file:
+      src: /home/vagrant/.gitconfig
+      dest: /home/vagrant/.gitconfig
+      state: link
+      force: yes
