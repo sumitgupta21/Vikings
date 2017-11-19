@@ -1,7 +1,10 @@
 job("Environment-provisioning") {
+		 scm {
+            git("https://github.com/sumitgupta21/Vikings.git")
+        } 
         steps {
-          ansiblePlaybook('/home/vagrant/repos/vagrantmachine/provision.yml') {
-			inventoryPath('/home/vagrant/repos/vagrantmachine/inventory')
+          ansiblePlaybook('provision.yml') {
+			inventoryPath('inventory')
 			ansibleName('Ansible-2.4.1.0')
 			}
         }
