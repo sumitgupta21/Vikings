@@ -1,19 +1,8 @@
 ---
-# tasks file for jdk8
-#  - name: Create download directory
-#    file: path={{ jdk8_download_path }}/ state=directory mode=0755
-
-#  - name: Download jdk8
-#    get_url:
-#      url: https://repository-mgr.ecom.ia.icacorp.net/repository/online-binaries/oracle/jdk8/u77-linux-x64/jdk8-u77-linux-x64-x64.tar.gz
-#      dest: "{{ jdk8_download_path }}/jdk8-u77-linux-x64-x64.tar.gz"
-#      mode: 0740
-#      validate_certs: no
-
   - name: Create installation directory
     file: path={{ jdk8_installation_path }}/ state=directory mode=0755
 
-  - name: Install jdk8 
+  - name: Install jdk8
     unarchive:
       src: "/home/vagrant/repos/vagrantmachine/roles/jdk8/files/jdk-8u151-linux-x64.tar.gz"
       dest: "{{ jdk8_installation_path }}"
